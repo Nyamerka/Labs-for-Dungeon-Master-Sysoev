@@ -4,7 +4,7 @@
 
 int main() {
     long quality, number;
-    long ost [9] = {-10000000000};
+    long ost [9] = {0};
     scanf("%ld", &quality);
     for (int i = 0; i < quality; i++) {
         scanf("%ld", &number);
