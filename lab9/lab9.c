@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <assert.h>
 #include <stdbool.h>
 
 double fabs (double x) {
@@ -49,7 +48,7 @@ int min (int x, int y) {
 
 int main () {
     int i = 13, j = -9, l = -4, previous_i, previous_j, previous_l;
-    for (int k = 1; k < 51; k++) {
+    for (int k = 0; k < 50; k++) {
         if (checkIntersection(i, j)) {
             printf ("Success! Time: %d\n", k);
             return 0;
