@@ -111,6 +111,10 @@ int main () {
                 }
                 if (is_NewWord(symbol)) {
                     state = NewWord;
+                    if (i == 0) {
+                        printf("0 0\n");
+                        break;
+                    }
                     printArray(i, number);
                     printf("%d\n", summ);
                 }
