@@ -8,50 +8,40 @@ bool is_NewWord (char symbol) {
     return (symbol == '\n' || symbol == '\t' || symbol == ',' || symbol == ' ') ? true : false;
 }
 
-bool englishSetsAreEqual (int set1 [26], int set2 [26]) {
-    for (int i = 0; i < 26; i++) {
-        if (set1 [i] != set2 [i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-void setToSet_clearSecondSet (int set1 [26], int set2 [26]) {
-    for (int i = 0; i < 26; i++) {
-        set1 [i] = set2 [i];
-        set2 [i] = 0;
-    }
-}
-
 int main () {
-    char letter;
-    int wordSet1 [26] = {0}, wordSet2 [26] = {0};
+    char letter, previous_letter = '0';
     bool flag = true;
+    int set1 = 0, set2 = 0;
     assert(is_NewWord('\n') == true);
     assert(is_NewWord('\t') == true);
     assert(is_NewWord('a') == false);
     while ((letter = getchar()) != EOF) {
+        letter = tolower(letter);
         if (is_NewWord(letter)) {
+            if ((set1 == 0 && set2 == 0) || is_NewWord(previous_letter)) {
+                continue;
+            }
             if (flag) {
                 flag = false;
                 continue;
             }
-            else {
-                if (englishSetsAreEqual(wordSet1, wordSet2)) {
-                    printf("Yes\n");
-                    return 0;
-                }
-                setToSet_clearSecondSet(wordSet1, wordSet2);
-                continue;
+            if (set1 == set2) {
+                printf("Yes\n");
+                return 0;
             }
-        }
-        letter = tolower(letter);
-        if (flag) {
-            wordSet1 [letter - 'a'] = 1;
+            if (set2 != 0) {
+                set1 = set2;
+                set2 = 0;
+            }
             continue;
         }
-        wordSet2 [letter - 'a'] = 1;
+        if (flag) {
+            set1 |= 1 << (letter - 'a');
+        }
+        else {
+            set2 |= 1 << (letter - 'a');
+        }
+        previous_letter = letter;
     }
     printf("No\n");
     return 0;
