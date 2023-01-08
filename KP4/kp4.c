@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <limits.h>
+#include <assert.h>
 
 long double f(long double x) {
     return (x * tanl(x)) - (1.0L / 3.0L);
@@ -44,6 +45,8 @@ long double dichotomy(long double left, long double right) {
 }
 
 int main () {
+    assert(f(0.2L) * f(1.0L) < 0);
+    assert(g(0.0L) * g(2.0L) < 0);
     printf("Variant 13: %.4Lf\n", Newton(0.2L, 1.0L));
     printf("Variant 14: %.4Lf\n", dichotomy(0.0L, 2.0L));
     return 0;
