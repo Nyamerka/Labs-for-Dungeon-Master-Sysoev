@@ -1,0 +1,233 @@
+Last login: Wed Mar  1 20:56:19 on ttys000
+mariavoropaeva@MacBook-Pro-Ivan ~ % ls
+BuyElephant.sh	Documents	Library		Music		Projects C++	PycharmProjects	cringe.txt	t2.txt
+Desktop		Downloads	Movies		Pictures	Public		Scrrr		lab2		test
+mariavoropaeva@MacBook-Pro-Ivan ~ % cd Desktop 
+mariavoropaeva@MacBook-Pro-Ivan Desktop % ls
+Стата
+mariavoropaeva@MacBook-Pro-Ivan Desktop % mkdir lab20
+mariavoropaeva@MacBook-Pro-Ivan Desktop % touch text1.txt
+mariavoropaeva@MacBook-Pro-Ivan Desktop % rm text1.txt
+mariavoropaeva@MacBook-Pro-Ivan Desktop % cd lab20
+mariavoropaeva@MacBook-Pro-Ivan lab20 % touch test1.txt
+mariavoropaeva@MacBook-Pro-Ivan lab20 % touch test2.txt
+mariavoropaeva@MacBook-Pro-Ivan lab20 % cat > test1.txt
+Тут фраза
+И тут фраза
+А тут другая фраза
+Ну и тут ещё одна
+^C
+mariavoropaeva@MacBook-Pro-Ivan lab20 % cat > test2.txt
+Тут фраза
+И тут фраза
+Хоба
+Хоба второй раз
+^C
+mariavoropaeva@MacBook-Pro-Ivan lab20 % diff -iBwu test1.txt test2.txt 
+--- test1.txt	2023-03-04 19:16:03.000000000 +0300
++++ test2.txt	2023-03-04 19:16:46.000000000 +0300
+@@ -1,4 +1,4 @@
+ Тут фраза
+ И тут фраза
+-А тут другая фраза
+-Ну и тут ещё одна
++Хоба
++Хоба второй раз
+mariavoropaeva@MacBook-Pro-Ivan lab20 % cmp -l -c test1.txt test2.txt 
+41 220 M-^P 245 ?
+42  40      320 ?
+43 321 ?    276 ?
+44 202 M-^B 320 ?
+45 321 ?    261 ?
+46 203 M-^C 320 ?
+47 321 ?    260 ?
+48 202 M-^B  12 ^J
+49  40      320 ?
+50 320 ?    245 ?
+51 264 ?    320 ?
+52 321 ?    276 ?
+53 200 M-^@ 320 ?
+54 321 ?    261 ?
+55 203 M-^C 320 ?
+56 320 ?    260 ?
+57 263 ?     40  
+59 260 ?    262 ?
+61 217 M-^O 202 M-^B
+62  40      320 ?
+63 321 ?    276 ?
+64 204 M-^D 321 ?
+65 321 ?    200 M-^@
+66 200 M-^@ 320 ?
+67 320 ?    276 ?
+68 260 ?    320 ?
+69 320 ?    271 ?
+70 267 ?     40  
+71 320 ?    321 ?
+72 260 ?    200 M-^@
+73  12 ^J   320 ?
+74 320 ?    260 ?
+75 235 M-^] 320 ?
+76 321 ?    267 ?
+77 203 M-^C  12 ^J
+cmp: EOF on test2.txt
+mariavoropaeva@MacBook-Pro-Ivan lab20 % tail -n3 test1.txt
+8
+9
+10
+mariavoropaeva@MacBook-Pro-Ivan lab20 % tail -n+4 test2.txt
+3
+4
+5
+6
+7
+8
+9
+10
+mariavoropaeva@MacBook-Pro-Ivan lab20 % tail -c15 test1.txt
+4
+5
+6
+7
+8
+9
+10
+mariavoropaeva@MacBook-Pro-Ivan lab20 % tail -c+2 test2.txt
+? сюды строк)
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+mariavoropaeva@MacBook-Pro-Ivan lab20 % wc -lmw test1.txt
+      11      13      39 test1.txt
+mariavoropaeva@MacBook-Pro-Ivan lab20 % wc -cmw test2.txt
+      13      35 test2.txt
+mariavoropaeva@MacBook-Pro-Ivan lab20 % grep -ich "1" test1.txt test2.txt
+2
+2
+mariavoropaeva@MacBook-Pro-Ivan lab20 % find . -name "*.txt" -print
+./test1.txt
+./test2.txt
+mariavoropaeva@MacBook-Pro-Ivan lab20 % head -n6 test2.txt 
+Тут тоже слова:
+Zaycev
+And
+Python
+Is
+Love
+mariavoropaeva@MacBook-Pro-Ivan lab20 % head -c54 test2.txt
+Тут тоже слова:
+Zaycev
+And
+Python
+Is
+Love
+mariavoropaeva@MacBook-Pro-Ivan lab20 % sort -bi test1.txt
+Computer
+Dungeon
+Linux
+Master
+Maxxxim
+Mouse
+Sysoev
+Тут теперь слова:
+mariavoropaeva@MacBook-Pro-Ivan lab20 % sort -nr test2.txt 
+Тут тоже слова:
+Zaycev
+Python
+Love
+Is
+Forever
+Cringe
+And
+mariavoropaeva@MacBook-Pro-Ivan lab20 % tee -ai test2.txt
+GG
+GG
+mariavoropaeva@MacBook-Pro-Ivan lab20 % tail test2.txt
+GG
+mariavoropaeva@MacBook-Pro-Ivan lab20 % tr "a-z" "A-Z"
+If you're 555, I'm 666     
+IF YOU'RE 555, I'M 666
+mariavoropaeva@MacBook-Pro-Ivan lab20 % tr -d "a-z"    
+MaXiM SySoEv        
+MXM SSE
+mariavoropaeva@MacBook-Pro-Ivan lab20 % cat > test1.txt
+Теперь наполним этот файл смыслом
+Смысл
+Смысл
+Больше смысла
+Эта строчка повторяется
+Эта строчка повторяется
+А эта нет
+И эта тоже
+И эта
+А эта нет
+Какой-то бред
+mariavoropaeva@MacBook-Pro-Ivan lab20 % uniq -dci test1.txt test2.txt
+mariavoropaeva@MacBook-Pro-Ivan lab20 % cat test2.txt
+   2 Смысл
+mariavoropaeva@MacBook-Pro-Ivan lab20 % sed '1,5d' test1.txt
+Эта строчка повторяется
+А эта нет
+И эта тоже
+И эта
+А эта нет
+Какой-то бред
+mariavoropaeva@MacBook-Pro-Ivan lab20 % sed -n 1,3p test1.txt
+Теперь наполним этот файл смыслом
+Смысл
+Смысл
+mariavoropaeva@MacBook-Pro-Ivan lab20 % sed '/Смысл/d' test1.txt
+Теперь наполним этот файл смыслом
+Больше смысла
+Эта строчка повторяется
+Эта строчка повторяется
+А эта нет
+И эта тоже
+И эта
+А эта нет
+Какой-то бред
+mariavoropaeva@MacBook-Pro-Ivan lab20 % iconv -f KOI8-R -t UTF-8 test1.txt
+п╒п╣п©п╣я─я▄ п╫п╟п©п╬п╩п╫п╦п╪ я█я┌п╬я┌ я└п╟п╧п╩ я│п╪я▀я│п╩п╬п╪
+п║п╪я▀я│п╩
+п║п╪я▀я│п╩
+п▒п╬п╩я▄я┬п╣ я│п╪я▀я│п╩п╟
+п╜я┌п╟ я│я┌я─п╬я┤п╨п╟ п©п╬п╡я┌п╬я─я▐п╣я┌я│я▐
+п╜я┌п╟ я│я┌я─п╬я┤п╨п╟ п©п╬п╡я┌п╬я─я▐п╣я┌я│я▐
+п░ я█я┌п╟ п╫п╣я┌
+п≤ я█я┌п╟ я┌п╬п╤п╣
+п≤ я█я┌п╟
+п░ я█я┌п╟ п╫п╣я┌
+п п╟п╨п╬п╧-я┌п╬ п╠я─п╣п╢
+mariavoropaeva@MacBook-Pro-Ivan lab20 % md5 -tx test1.txt
+MD5 time trial. Digesting 100000 10000-byte blocks ... done
+Digest = 766a2bb5d24bddae466c572bcabca3ee
+Time = 1.854772 seconds
+Speed = 539149824.000000 bytes/second
+MD5 test suite:
+MD5 ("") = d41d8cd98f00b204e9800998ecf8427e - verified correct
+MD5 ("a") = 0cc175b9c0f1b6a831c399e269772661 - verified correct
+MD5 ("abc") = 900150983cd24fb0d6963f7d28e17f72 - verified correct
+MD5 ("message digest") = f96b697d7cb7938d525a2f31aaf161d0 - verified correct
+MD5 ("abcdefghijklmnopqrstuvwxyz") = c3fcd3d76192e4007dfb496cca67e13b - verified correct
+MD5 ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789") = d174ab98d277d9f5a5611c2c9f419d9f - verified correct
+MD5 ("12345678901234567890123456789012345678901234567890123456789012345678901234567890") = 57edf4a22be3c955ac49da2e2107b67a - verified correct
+MD5 ("MD5 has not yet (2001-09-03) been broken, but sufficient attacks have been made that its security is in some doubt") = b50663f41d44d92171cb9976bc118538 - verified correct
+MD5 (test1.txt) = 0edfc8c992c9ad836773ce2e50426e00
+mariavoropaeva@MacBook-Pro-Ivan lab20 % file -bi test1.txt
+regular file
+mariavoropaeva@MacBook-Pro-Ivan lab20 % split -n50 -a6 test1.txt
+mariavoropaeva@MacBook-Pro-Ivan lab20 % ls
+ai		xaaaaad		xaaaaal		xaaaaat		xaaaabb		xaaaabj		xaaaabr
+lab20.txt	xaaaaae		xaaaaam		xaaaaau		xaaaabc		xaaaabk		xaaaabs
+netxt.c		xaaaaaf		xaaaaan		xaaaaav		xaaaabd		xaaaabl		xaaaabt
+test1.txt	xaaaaag		xaaaaao		xaaaaaw		xaaaabe		xaaaabm		xaaaabu
+test2.txt	xaaaaah		xaaaaap		xaaaaax		xaaaabf		xaaaabn		xaaaabv
+xaaaaaa		xaaaaai		xaaaaaq		xaaaaay		xaaaabg		xaaaabo		xaaaabw
+xaaaaab		xaaaaaj		xaaaaar		xaaaaaz		xaaaabh		xaaaabp		xaaaabx
+xaaaaac		xaaaaak		xaaaaas		xaaaaba		xaaaabi		xaaaabq
